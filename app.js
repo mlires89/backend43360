@@ -1,8 +1,12 @@
 import express from "express";
-import ProductManager from "../src/ProductManager.js";
+import ProductManager from "./ProductManager.js";
+
+const app = express();
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 
 const manager = new ProductManager("./productos.json");
-const app = express();
+
 
 app.get("/productos", async (req,res)=>{
     const {limit} = req.query;
@@ -13,6 +17,8 @@ app.get("/productos", async (req,res)=>{
         res.send(productos)
     }    
 })
+
+
 
 app.get("/productos/:id", async (req,res)=>{
     const {id} = req.params;
