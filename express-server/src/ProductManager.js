@@ -1,11 +1,14 @@
 import fs from "fs";
 
 class ProductManager {
+    
     constructor (path){
         this.path=path,
         this.products =[]
     }
-        
+    
+   
+    
     //creo esta funcion para consultar la data del archivo
     async consultarArchivo() {
         try {
@@ -27,29 +30,32 @@ class ProductManager {
     }
     
 
-    async addProduct(title,description,precio,thumbnail,code,stock){
-       
+    async addProduct(data){
+        
         await this.consultarArchivo();  
-        if (title && description && precio && thumbnail && code && stock){
-            const producto = this.products.find((pr)=> pr.code === code);            
+        if (!data.title || !data.description || !data.price || !data.code || !data.category || !data.stock){
+            throw new Error (`Faltan datos para ingresar el producto`);
+        }else{
+            const producto = this.products.find((pr)=> pr.code === data.code);            
             if (producto){
                 console.log(`El producto con Código ${producto.code} ya existe`);
             }else{    
                 const productoNuevo = {
                     id:this.products.length,
-                    title,
-                    description,
-                    precio,
-                    thumbnail,
-                    code,
-                    stock
+                    title: data.title,
+                    description: data.description,
+                    price: data.price,
+                    code:data.code,
+                    category:data.category,
+                    stock:data.stock,
+                    status:data.status,
+                    thumbnails:data.thumbnails
                 }
                 this.products.push(productoNuevo);
                 let prodStr = JSON.stringify(this.products);
                 await this.escribirArchivo(prodStr);
             }
-        }else {
-            throw new Error (`Faltan datos para ingresar el producto`);
+        
         }
     }
 
@@ -84,11 +90,11 @@ class ProductManager {
                     case "description" :
                         producto.description = obj.description;
                         break;
-                    case "precio":
-                        producto.precio = obj.precio;
+                    case "price":
+                        producto.price = obj.price;
                         break;
-                    case "thumbnail":
-                        producto.thumbnail = obj.thumbnail;
+                    case "thumbnails":
+                        producto.thumbnails = obj.thumbnails;
                         break;
                     case "code" :
                         producto.code = obj.code;
@@ -96,6 +102,9 @@ class ProductManager {
                     case "stock":
                         producto.stock = obj.stock;
                         break;
+                    case "stock":
+                        producto.category = obj.category;
+                    break;
                     default:
                         console.log('key not found');
                 }

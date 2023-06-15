@@ -19,8 +19,8 @@
     },
     {
         "id": 2,
-        "title": "producto actualizado",
-        "description": "Este es un producto prueba",
+        "title": "cambio de Producto",
+        "description": "producto actualizado por PUT",
         "precio": 200,
         "thumbnail": "sin imagen",
         "code": "abc123",
@@ -28,8 +28,8 @@
     },
     {
         "id": 3,
-        "title": "producto actualizado",
-        "description": "otro es un producto prueba",
+        "title": "cambio de Producto",
+        "description": "producto actualizado por PUT",
         "precio": 200,
         "thumbnail": "sin imagen",
         "code": "abc123",
@@ -43,14 +43,5 @@
         "thumbnail": "sin imagen",
         "code": "abc123",
         "stock": 3
-    },
-    {
-        "id": 5,
-        "title": "producto actualizado",
-        "description": "otro es un producto prueba",
-        "precio": 100,
-        "thumbnail": "sin imagen",
-        "code": "abc123",
-        "stock": 12
     }
 ]
