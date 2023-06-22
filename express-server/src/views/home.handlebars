@@ -1,0 +1,16 @@
+<h1>Productos creados actualmente</h1>
+<div>
+      <ul>
+      {{#each productos}}
+        <li>ID: {{id}}
+            <ul>
+              <li> Nombre: {{title}}</li>
+              <li> Descripcion: {{description}}</li>
+              <li>Precio: {{price}}</li>
+              <li>Codigo: {{code}}</li>
+              <li>Stock: {{stock}}</li>
+            </ul>
+        </li>
+      {{/each}}
+    </ul>
+</div>

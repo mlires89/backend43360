@@ -41,7 +41,8 @@ productsRouter.post("/",  async (req,res)=>{
 
     await manager.addProduct(productData);
     res.status(201).send("producto agregado");
-   
+    const products = await manager.getProducts();
+    req.io.emit("products-updated", products);
 })
 
 
@@ -52,8 +53,9 @@ productsRouter.put("/:id", async (req,res)=>{
         id:idProd,
     }
     await manager.updateProduct(productData);
-    res.send(`producto id: ${idProd} actualizado`)
-
+    res.send(`producto id: ${idProd} actualizado`);
+    const products = await manager.getProducts();
+    req.io.emit("products-updated", products);
 })
 
 productsRouter.delete("/:id", async (req,res)=>{
@@ -61,7 +63,8 @@ productsRouter.delete("/:id", async (req,res)=>{
     const idProd = Number(req.params.id);
     await manager.deleteProducto(idProd);
     res.send(`producto con id:${idProd} eliminado`);
-
+    const products = await manager.getProducts();
+    req.io.emit("products-updated", products);
 })
 
 
